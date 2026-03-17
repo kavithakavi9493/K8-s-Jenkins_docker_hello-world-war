@@ -1,0 +1,5 @@
+Application: {{ .Chart.Name }}
+Version:     {{ .Chart.AppVersion }}
+Replicas:    {{ .Values.replicaCount }}
+Image:       {{ .Values.image.repository }}:{{ .Values.image.tag }}
+Service:     {{ .Values.service.type }} → NodePort {{ .Values.service.nodePort }}

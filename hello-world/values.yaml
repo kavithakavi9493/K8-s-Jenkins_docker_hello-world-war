@@ -1,0 +1,14 @@
+replicaCount: 2
+
+image:
+  repository: docker.io/pradeepreddyhub/hello-world
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8080
+  nodePort: 30080        # any port between 30000–32767
+
+containerPort: 8080
