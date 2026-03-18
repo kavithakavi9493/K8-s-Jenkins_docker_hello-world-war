@@ -18,18 +18,18 @@ pipeline {
         }
         stage('Docker Build & Push') {
             steps {
-                sh """
+                sh '''
                 docker build -t $DOCKER_IMAGE:$IMAGE_TAG .
                 echo $DOCKER_CREDS_PSW | docker login -u $DOCKER_CREDS_USR --password-stdin
                 docker push $DOCKER_IMAGE:$IMAGE_TAG
                 docker tag  $DOCKER_IMAGE:$IMAGE_TAG $DOCKER_IMAGE:latest
                 docker push $DOCKER_IMAGE:latest
-                """
+                '''
             }
         }
         stage('Helm Package & Push to JFrog') {
             steps {
-                sh """
+                sh '''
                 helm lint $HELM_CHART
                 helm package $HELM_CHART
                 curl -u $JFROG_CREDS_USR:$JFROG_CREDS_PSW \
@@ -39,12 +39,12 @@ pipeline {
                 curl -u $JFROG_CREDS_USR:$JFROG_CREDS_PSW \
                   -T index.yaml \
                   ${JFROG_URL}/index.yaml
-                """
+                '''
             }
         }
         stage('Deploy to Kubernetes') {
             steps {
-                sh """
+                sh '''
                 helm repo add jfrog-helm ${JFROG_URL} \
                   --username $JFROG_CREDS_USR \
                   --password $JFROG_CREDS_PSW \
@@ -56,7 +56,7 @@ pipeline {
                   --namespace $KUBE_NS \
                   --wait \
                   --timeout 2m
-                """
+                '''
             }
         }
         stage('Verify Deployment') {
