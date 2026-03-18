@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/pradeepreddy-hub/Jenkins_docker_hello-world-war.git'
+                git branch: 'main', url: 'https://github.com/kavithakavi9493/K8-s-Jenkins_docker_hello-world-war.git'
             }
         }
         stage('Docker Build & Push') {
