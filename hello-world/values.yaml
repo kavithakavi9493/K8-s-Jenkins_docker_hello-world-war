@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: docker.io/pradeepreddyhub/hello-world
+  repository: docker.io/kavitha011/hello-world
   tag: latest
   pullPolicy: IfNotPresent
 
