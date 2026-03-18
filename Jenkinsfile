@@ -60,16 +60,17 @@ pipeline {
             }
         }
         stage('Verify Deployment') {
-            steps {
-                sh '''
-                kubectl rollout status deployment/$HELM_CHART \
-                  --namespace $KUBE_NS \
-                  --timeout=120s
-                kubectl get pods -n $KUBE_NS -l app=$HELM_CHART
-                kubectl get svc  $HELM_CHART -n $KUBE_NS
-                '''
-            }
-        }
+    steps {
+        sh '''
+        /var/jenkins_home/kubectl rollout status deployment/hello-world \
+          --namespace default \
+          --timeout=120s
+        /var/jenkins_home/kubectl get pods -n default -l app=hello-world
+        /var/jenkins_home/kubectl get svc hello-world -n default
+        '''
+    }
+}
+
     }
     post {
         success {
