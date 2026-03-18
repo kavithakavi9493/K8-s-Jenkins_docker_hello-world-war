@@ -61,13 +61,13 @@ pipeline {
         }
         stage('Verify Deployment') {
             steps {
-                sh """
+                sh '''
                 kubectl rollout status deployment/$HELM_CHART \
                   --namespace $KUBE_NS \
                   --timeout=120s
                 kubectl get pods -n $KUBE_NS -l app=$HELM_CHART
                 kubectl get svc  $HELM_CHART -n $KUBE_NS
-                """
+                '''
             }
         }
     }
